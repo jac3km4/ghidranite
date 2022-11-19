@@ -44,7 +44,7 @@ class AmmoniteScript extends GhidraScript {
 class GhidraAmmoniteWrapper extends CodeWrapper {
   override def apply(code: String, source: Util.CodeSource, imports: Imports, printCode: String, indexedWrapper: Name, extraCode: String): (String, String, Int) = {
     val (a0, a1, a2) = ammonite.compiler.DefaultCodeWrapper.apply(code, source, imports, printCode, indexedWrapper, extraCode)
-    if (source.wrapperName.raw == "main") {
+    if (source.wrapperName.raw.toLowerCase.endsWith("main")) {
       (a0,
         s"""onStart(ghidranite.GhidraBridge.value)
            |$a1
